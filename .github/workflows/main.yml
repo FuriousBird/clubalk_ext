@@ -1,8 +1,8 @@
-name: My First Manual Workflow
+name: Upload Ext to Store
 on: [workflow_dispatch]
 jobs:
   example:
-    name: Example Job
+    name: Build & Upload
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -13,6 +13,7 @@ jobs:
           files: src/*
           recursive: true
           dest: result.xpi
+          
       - name: Firefox Addon Action
         # You may pin to the exact commit or the version.
         # uses: trmcnvn/firefox-addon@0d05671269b82c69c3f22ed86d8e772e89d47cf4
@@ -23,7 +24,7 @@ jobs:
           # Path to your addons .xpi file
           xpi: result.xpi # optional
           # Path to your addons manifest.json file to read the version
-          manifest: /src/manifest.json # optional
+          manifest: src/manifest.json # optional
           # Firefox Addon API Key
           api-key: ${{ secrets.FIREFOX_API_KEY }} # optional
           # Firefox Addon API Secret
