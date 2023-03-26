@@ -5,9 +5,12 @@ jobs:
     name: Example Job
     runs-on: ubuntu-latest
     steps:
+      - name: checkout
+        uses: actions/checkout@v1
+
       - uses: vimtor/action-zip@v1
         with:
-          files: /src/*
+          files: src/*
           recursive: true
           dest: result.xpi
       - name: Firefox Addon Action
@@ -18,7 +21,7 @@ jobs:
           # Your addons UUID as defined by Mozilla
           uuid: "{a77de08b-8fd3-429f-90a9-3e4b2b908275}" # optional
           # Path to your addons .xpi file
-          xpi: /result.xpi # optional
+          xpi: result.xpi # optional
           # Path to your addons manifest.json file to read the version
           manifest: /src/manifest.json # optional
           # Firefox Addon API Key
