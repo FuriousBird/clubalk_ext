@@ -1,0 +1,27 @@
+name: My First Manual Workflow
+on: [workflow_dispatch]
+jobs:
+  example:
+    name: Example Job
+    runs-on: ubuntu-latest
+    steps:
+      - uses: vimtor/action-zip@v1
+        with:
+          files: /src/*
+          recursive: true
+          dest: result.xpi
+      - name: Firefox Addon Action
+        # You may pin to the exact commit or the version.
+        # uses: trmcnvn/firefox-addon@0d05671269b82c69c3f22ed86d8e772e89d47cf4
+        uses: trmcnvn/firefox-addon@v1
+        with:
+          # Your addons UUID as defined by Mozilla
+          uuid: "{a77de08b-8fd3-429f-90a9-3e4b2b908275}" # optional
+          # Path to your addons .xpi file
+          xpi: /result.xpi # optional
+          # Path to your addons manifest.json file to read the version
+          manifest: /src/manifest.json # optional
+          # Firefox Addon API Key
+          api-key: ${{ secrets.FIREFOX_API_KEY }} # optional
+          # Firefox Addon API Secret
+          api-secret: ${{ secrets.FIREFOX_API_SECRET }} # optional
